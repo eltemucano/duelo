@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Es Hora de Duelo</title>
+</head>
+<body>
+  <h1>Es hora de Duelo</h1>
+
+  <script>
+    class Carta {
+      constructor(nombre, costo) {
+        this.nombre = nombre;
+        this.costo = costo;
+      }
+    }
+
+    class Unit extends Carta{
+      constructor (nombre, costo, poder, resiliencia){
+        super(nombre, costo);
+          this.poder = poder;
+          this.resiliencia = resiliencia;
+      }
+
+      attack(target){
+          target.resiliencia= target.resiliencia-this.poder;
+      }
+    }
+
+    class Effect extends Card{
+      constructor (nombre, costo, text, stat, magnitud){
+        super(nombre, costo);
+          this.text = text;
+          this.stat = stat;
+          this.magnitud = magnitud;
+      }
+    }
+
+    Afectar(unit) {
+      if (this.stat == "resiliencia"){
+        unit.resiliencia= unit.resiliencia+this.magnitud;
+      }else if (this.stat == "poder"){
+        unit.poder= unit.poder+this.magnitud;
+      }
+    }
+
+    //CARTAS UNIT
+    //const Nrojo= new Unit('Nrojo',3,3,4);
+    //const Nnegro= new Unit('Nnegro',4,5,4);
+
+    //CARTAS EFFECT
+    //const ADificil= new Effect('Algoritmo Dificil', 2,'aumentar la resiliencia del objetivo en 3','Resiliencia', +3);
+    //const Rechazo= new Effect('Rechazo de Promesa no Manejado', 1, 'reducir la resiliencia del objetivo en 2', 'Resiliencia', -2);
+    //const Pareja= new Effect('Programación en Pareja', 3, 'aumentar el poder del objetivo en 2', 'Poder', +2);
+
+
+
+    //const fito = new Auto('Fiat', 'Palio Fire', 1300, 13);
+    {
+    console.log("Jugador 1  convoca a Ninja Rojo");
+    const Nrojo= new Unit('Nrojo',3,3,4);
+    debugger;
+
+    console.log("El jugador 1 juega 'Algoritmo dificil' en 'Ninja Cinturon Rojo'");
+    const ADificil= new Effect('Algoritmo Dificil', 2,'aumentar la resiliencia del objetivo en 3','Resiliencia', +3);
+    ADificil.Afectar(Nrojo);
+    debugger;
+
+    console.log('El jugador 2 convoca a "Ninja Cinturon Negro"');
+    const Nnegro= new Unit('Nnegro',4,5,4);
+    debugger;
+
+    console.log('El jugador 2 juega "rechazo de promeda no manejado" en "Ninja Cienturon Rojo"');
+    const Rechazo= new Effect('Rechazo de Promesa no Manejado', 1, 'reducir la resiliencia del objetivo en 2', 'Resiliencia', -2);
+    Rechazo.Afectar(Nrojo);
+    debugger;
+
+    console.log('El jugador 1 juega "Programacion en pareja" en "Ninja Cinturon Rojo');
+    const Pareja= new Effect('Programación en Pareja', 3, 'aumentar el poder del objetivo en 2', 'Poder', +2);
+    Pareja.Afectar(Nrojo);
+    debugger;
+
+    console.log('"Ninja Cinturon Rojo" ataca a "Ninja Cinturon Negro"');
+    Nrojo.attack(Nnegro);
+    }
+  </script>
+</body>
+</html>
